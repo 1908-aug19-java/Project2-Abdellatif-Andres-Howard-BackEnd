@@ -24,114 +24,72 @@ public class Pokemon implements Serializable {
 	@Column(name="pokemonId")
 	private Integer pokemonId;
 	
+	@Column(name="userId")
+	private Integer userId;
+	
 	@NotBlank
 	private String pokemonName;
 	private String pokemonNickName;
 
 	private String type;
-	private String move;
-//	private String starterPokemon;
-
-	
-	
+	private String move;	
 
 	public Pokemon() {
 		super();
 	}
-
-
-
-
-	public Pokemon(@NotNull Integer pokemonId, @NotBlank String pokemonName, String pokemonNickName, String type,
-			String move) {
+	public Pokemon(String pokemonName) {
+		super();
+		this.pokemonName = pokemonName;
+	}
+	public Pokemon(@NotNull Integer pokemonId, Integer userId, @NotBlank String pokemonName, String pokemonNickName,
+			String type, String move) {
 		super();
 		this.pokemonId = pokemonId;
+		this.userId = userId;
 		this.pokemonName = pokemonName;
 		this.pokemonNickName = pokemonNickName;
 		this.type = type;
 		this.move = move;
 	}
-
-
-
-
 	public Integer getPokemonId() {
 		return pokemonId;
 	}
-
-
-
-
 	public void setPokemonId(Integer pokemonId) {
 		this.pokemonId = pokemonId;
 	}
-
-
-
-
+	public Integer getUserId() {
+		return userId;
+	}
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
 	public String getPokemonName() {
 		return pokemonName;
 	}
-
-
-
-
 	public void setPokemonName(String pokemonName) {
 		this.pokemonName = pokemonName;
 	}
-
-
-
-
 	public String getPokemonNickName() {
 		return pokemonNickName;
 	}
-
-
-
-
 	public void setPokemonNickName(String pokemonNickName) {
 		this.pokemonNickName = pokemonNickName;
 	}
-
-
-
-
 	public String getType() {
 		return type;
 	}
-
-
-
-
 	public void setType(String type) {
 		this.type = type;
 	}
-
-
-
-
 	public String getMove() {
 		return move;
 	}
-
-
-
-
 	public void setMove(String move) {
 		this.move = move;
 	}
-
-
-
-
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
-
-
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -141,12 +99,9 @@ public class Pokemon implements Serializable {
 		result = prime * result + ((pokemonName == null) ? 0 : pokemonName.hashCode());
 		result = prime * result + ((pokemonNickName == null) ? 0 : pokemonNickName.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		return result;
 	}
-
-
-
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -181,22 +136,20 @@ public class Pokemon implements Serializable {
 				return false;
 		} else if (!type.equals(other.type))
 			return false;
+		if (userId == null) {
+			if (other.userId != null)
+				return false;
+		} else if (!userId.equals(other.userId))
+			return false;
 		return true;
 	}
-
-
-
-
 	@Override
 	public String toString() {
-		return "Pokemon [pokemonId=" + pokemonId + ", pokemonName=" + pokemonName + ", pokemonNickName="
-				+ pokemonNickName + ", type=" + type + ", move=" + move + "]";
+		return "Pokemon [pokemonId=" + pokemonId + ", userId=" + userId + ", pokemonName=" + pokemonName
+				+ ", pokemonNickName=" + pokemonNickName + ", type=" + type + ", move=" + move + "]";
 	}
 
-
-
-
-
+	
 
 
 	

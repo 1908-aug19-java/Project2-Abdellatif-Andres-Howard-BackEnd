@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -39,7 +40,7 @@ public class Trainer implements Serializable {
 	@Size(min=4, max=8)
 	private String password;
 	private String starterPokemon;
-	@ManyToMany(fetch=FetchType.EAGER)
+	@OneToMany(fetch=FetchType.EAGER)
 	@JoinTable(
 			name="Poke_List",
 			joinColumns={@JoinColumn(name="trainerId")},
@@ -49,10 +50,17 @@ public class Trainer implements Serializable {
 	public Trainer() {
 		super();
 	}
-	public Trainer (Integer trainerId) {
-		super();
-		this.trainerId = trainerId;
-	}
+	//FOR LOGIN
+		public Trainer(String userName, String password) {
+			super();
+			this.trainerId= 0;
+			this.userName = userName;
+			this.password= password;
+		}
+		public Trainer (String userName) {
+			super();
+			this.userName = userName;
+		}
 	public Trainer(Integer trainerId, String firstName, String lastName, String userName, String password,
 			String starterPokemon, List<Pokemon> pokelist) {
 		super();
