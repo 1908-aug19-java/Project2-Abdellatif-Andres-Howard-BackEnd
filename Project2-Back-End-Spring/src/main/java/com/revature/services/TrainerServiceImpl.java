@@ -46,7 +46,12 @@ public class TrainerServiceImpl implements TrainerService {
 	}
 
 	@Override
+	public Trainer findTrainerByuserName(String userName) {
+		return trainerRepository.findTrainerByuserName(userName);
+	}
+	@Override
 	public List<Trainer> findTrainersByuserName(String userName) {
+		// TODO Auto-generated method stub
 		return trainerRepository.findTrainersByuserName(userName);
 	}
 
@@ -54,6 +59,7 @@ public class TrainerServiceImpl implements TrainerService {
 	public Boolean  validateTrainer(Trainer t) {
 		return trainerRepository.findTrainerByuserNameAndPassword(t.getUserName(),t.getPassword())!=null;
 	}
+	
 
 	
 

@@ -8,11 +8,11 @@ import com.revature.models.Trainer;
 
 public interface TrainerRepository extends JpaRepository<Trainer , Integer> 
 {
-	public List<Trainer> findTrainersByuserName(String userName);
+	public List<Trainer> findTrainersByuserName(String userName);//for forgetting username
+	public Trainer findTrainerByuserName(String userName);//for delet
 	public Trainer findTrainerByuserNameAndPassword(String userName, String password);
 	public List<Trainer> findAllPokemonByTrainerId(Integer id);
-	//public  Trainer findByName(String firstName);
-	//public Trainer findOne(	Integer id);// for testing
+
 		
 	
 }

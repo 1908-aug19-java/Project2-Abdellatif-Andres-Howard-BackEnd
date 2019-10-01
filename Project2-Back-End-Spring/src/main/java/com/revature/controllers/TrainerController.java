@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.revature.models.Trainer;
 import com.revature.services.TrainerService;
 
+import Exceptions.TrainerNotFoundException;
+
 @RestController 
 @CrossOrigin(maxAge = 3600)
 @RequestMapping("/users")
@@ -28,17 +30,23 @@ public class TrainerController {
 	@Autowired
 	private TrainerService trainerService;	
 	@GetMapping
-	public List<Trainer> getAll(@RequestParam(value="userName",required=false)String userName){
-		if(userName!=null) {
-			System.out.println(userName);
-			return trainerService.findTrainersByuserName(userName);
-		}
+	public List<Trainer> getAll(){
 		return trainerService.findAllTrainers();
+	}
+	@GetMapping
+	public List<Trainer> getAllbyUsername(@RequestParam(value="userName",required=false)String userName){
+		if(userName==null) {
+			throw new TrainerNotFoundException();
+		}
+			return trainerService.findTrainersByuserName(userName);
 	}	
 	@GetMapping("/{id}")
 	public Trainer getTrainersById(@PathVariable("id")Integer id) {
-		return trainerService.findTrainerById(id);
-
+		Trainer t=trainerService.findTrainerById(id);
+		if (t==null) {
+			throw new TrainerNotFoundException();
+		}
+		return t;
 	}
 //	@GetMapping("/{userId}/pokemons")
 //	public List<Trainer> getAllPokemonByuserId(@PathVariable("userId")Integer userid) {
@@ -56,16 +64,13 @@ public class TrainerController {
 		return trainerService.updateTrainer(t);		
 	}
 	
-	@DeleteMapping("/{username}")
+	@DeleteMapping("/{userName}")
 	public Trainer deleteTrainer(@PathVariable("userName")String username) {
-		Trainer trainer = (Trainer) trainerService.findTrainersByuserName(username);
-				
+		Trainer trainer =  trainerService.findTrainerByuserName(username);
+		if (trainer==null) {
+			throw new TrainerNotFoundException();
+		}				
 		return trainerService.deleteTrainer(trainer);
 	}
 
-	 
-	
-	
-	
-	
 }

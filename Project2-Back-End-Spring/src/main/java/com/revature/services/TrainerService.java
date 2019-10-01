@@ -13,7 +13,10 @@ public interface TrainerService {
 	public Trainer updateTrainer(Trainer t);
 	public Trainer deleteTrainer(Trainer t);
 	public List<Trainer> findTrainersByuserName(String userName);
+	public  Trainer findTrainerByuserName(String userName);
+
 	public Boolean validateTrainer(Trainer t);
+	//public Trainer findById(Integer id);
 
 
 }
