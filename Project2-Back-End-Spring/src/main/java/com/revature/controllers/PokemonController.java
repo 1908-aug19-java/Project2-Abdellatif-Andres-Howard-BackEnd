@@ -1,10 +1,12 @@
 package com.revature.controllers;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,8 +15,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.revature.exceptions.PokemonNotFoundException;
 import com.revature.models.Pokemon;
 //import com.revature.services.PokemonService;
 import com.revature.services.PokemonService;
@@ -22,6 +26,8 @@ import com.revature.services.PokemonService;
 
 
 @RestController // or add response body to each mapping
+@CrossOrigin(maxAge = 3600)
+
 @RequestMapping("/pokemons")
 
 public class PokemonController {
@@ -29,37 +35,50 @@ public class PokemonController {
 	private PokemonService pokemonService;
 	
 	@GetMapping
-	public List<Pokemon> getAll(@RequestParam(value="pokemonName",required=false)String name){
-		if(name!=null) {
-			return  pokemonService.findPokemonsByName(name);
-		}
+	public List<Pokemon> getAll()
+	{	
 		return pokemonService.findAllPokemons();
 	}	
-	@GetMapping("/{id}")
-	public Pokemon getPokemonById(@PathVariable("id")Integer id) {
-		return pokemonService.findPokemonById(id);
+	@GetMapping("/{userId}")
+	public List<Pokemon> getAllPokemonsByUserId(@PathVariable("userId")Integer id) {
+		List<Pokemon> pokelist= pokemonService.findPokemonsByUserId(id);
+		if (pokelist==null) {
+			throw new PokemonNotFoundException();
+		}
+		return pokelist;
 	}
-	@GetMapping("/{userid}")
-	public List<Pokemon> getAllPokemonsByUserId(@PathVariable("userid")Integer id) {
-		return pokemonService.getPokemonsByUserId(id);
+	@GetMapping("/pokemons")
+	@ResponseBody
+	public Pokemon getpokemonsByName(@RequestParam(name="pokemonName",required=false) String name){
+
+		if(name!=null) {
+			return pokemonService.findPokemonByName(name);		
+		}
+		throw new PokemonNotFoundException();
 	}
-	
 	@PostMapping
 	public ResponseEntity<Pokemon> addPokemon(@RequestBody Pokemon p){
+		if (p==null) {
+			System.out.println("Form cannot be null");				
+		    return new ResponseEntity<Pokemon>(HttpStatus.BAD_REQUEST);
+		}
+		
 		pokemonService.addPokemon(p);
 		return new ResponseEntity<Pokemon>(p, HttpStatus.CREATED);
 	}
 	
-	@PutMapping("/{id}")
-	public Pokemon updatePokemon(@PathVariable("pokemonNickName")String nickName, @RequestBody Pokemon p) {
-		p.setPokemonNickName(nickName);
+	@PutMapping("/{pokemonName}")
+	public Pokemon updatePokemon(@PathVariable("pokemonName")String name, @RequestBody Pokemon p) {
+		p.setPokemonNickName(name);
 		return pokemonService.updatePokemon(p);
 		
 	}
-	
-	@DeleteMapping("/{id}")
-	public Pokemon deletePokemon(@PathVariable("pokemonName")String name) {
-		return pokemonService.deletePokemon(new Pokemon(name));
+	@DeleteMapping("/{pokemonName}")
+	public Pokemon deletePokemon(@PathVariable("pokemonName")String pokeName) {
+		Pokemon p =  pokemonService.findPokemonByName(pokeName);
+		if (p==null) {
+			throw new PokemonNotFoundException();
+		}
+		return pokemonService.deletePokemon(p);
 	}
-	
 }

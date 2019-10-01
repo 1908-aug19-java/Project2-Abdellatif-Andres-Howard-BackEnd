@@ -32,17 +32,7 @@ public class PokemonControllerTest {
 	    public void init() {
 	        MockitoAnnotations.initMocks(this);
 	    }
-	    @Test
-	    public void testFindPokemonById() {
-	        Pokemon p  = new Pokemon();
-	        p.setPokemonId(1);
-	        when(pokemonService.findPokemonById(1)).thenReturn(p);
-	        
-	        Pokemon pp = pokemonController.getPokemonById(1);
-	        System.out.println("pp"+pp);
-	        verify(pokemonService).findPokemonById(1);
-	        assertEquals(1,pp.getPokemonId().intValue());
-	    }
+
 	    
 	    @Test
 	    public void testfindAllPokemonByUserId() {
@@ -54,17 +44,16 @@ public class PokemonControllerTest {
 	        pokeList.add(p1);
 	        pokeList.add(p2);
 
-	        when(pokemonService.getPokemonsByUserId(1)).thenReturn(pokeList);
+	        when(pokemonService.findPokemonsByUserId(1)).thenReturn(pokeList);
 	        List<Pokemon> pokemonList =pokemonController.getAllPokemonsByUserId(1);
 	        
-	        verify(pokemonService).getPokemonsByUserId(1);
+	        verify(pokemonService).findPokemonsByUserId(1);
 	        assertEquals(2, pokemonList.size());
 	        assertNotNull(pokemonController.getAllPokemonsByUserId(1));
 	    }
 	    @Test
 	    public void testaddPokemon() {
 	        Pokemon p  = new Pokemon(1,1,"mew","mew mew","fire","fly");
-	        //p.setPokemonId(1);
 	        when(pokemonService.addPokemon(p)).thenReturn(p);
 	        
 	        ResponseEntity<Pokemon> pp = pokemonController.addPokemon(p);

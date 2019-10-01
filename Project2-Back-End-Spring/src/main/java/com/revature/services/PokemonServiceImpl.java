@@ -18,22 +18,15 @@ public class PokemonServiceImpl implements PokemonService{
 		return pokemonRepository.findAll();
 	}
 	@Override
-	public Pokemon findPokemonById(Integer id) {
-		
-		return pokemonRepository.getOne(id);
+	public Pokemon findPokemonByName(String pokemonName) {
+		return pokemonRepository.findPokemonByPokemonName(pokemonName);
 	}
 	@Override
-	public Pokemon findPokemonByUserId(Integer userId) {
-		return pokemonRepository.getOne(userId);
+	public List<Pokemon> findPokemonsByUserId(Integer userId)	{
+		
+		return pokemonRepository.findAllPokemonsByUserId(userId);
 	}
 
-	@Override
-	public List<Pokemon> getPokemonsByUserId(Integer userId)	{
-		
-		return pokemonRepository.findAllByUserId(userId);
-	}
-	
-	
 	@Override
 	public Pokemon addPokemon(Pokemon p) {
 		
@@ -53,10 +46,7 @@ public class PokemonServiceImpl implements PokemonService{
 	public Pokemon updatePokemon(Pokemon p) {
 		return pokemonRepository.save(p);
 	}
-	@Override
-	public List<Pokemon> findPokemonsByName(String pokemonName) {
-		return pokemonRepository.findByPokemonName(pokemonName);
-	}
-	
+
+		
 }
 

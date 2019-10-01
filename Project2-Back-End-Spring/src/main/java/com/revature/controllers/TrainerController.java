@@ -17,10 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.revature.exceptions.TrainerNotFoundException;
 import com.revature.models.Trainer;
 import com.revature.services.TrainerService;
-
-import Exceptions.TrainerNotFoundException;
 
 @RestController 
 @CrossOrigin(maxAge = 3600)
@@ -29,17 +28,18 @@ public class TrainerController {
 
 	@Autowired
 	private TrainerService trainerService;	
+	
 	@GetMapping
 	public List<Trainer> getAll(){
 		return trainerService.findAllTrainers();
 	}
-	@GetMapping
-	public List<Trainer> getAllbyUsername(@RequestParam(value="userName",required=false)String userName){
-		if(userName==null) {
-			throw new TrainerNotFoundException();
-		}
-			return trainerService.findTrainersByuserName(userName);
-	}	
+//	@GetMapping("/{userName}")
+//	public List<Trainer> getAllbyUsername(@RequestParam(value="userName",required=false)String userName){
+//		if(userName==null) {
+//			throw new TrainerNotFoundException();
+//		}
+//			return trainerService.findTrainersByuserName(userName);
+//	}	
 	@GetMapping("/{id}")
 	public Trainer getTrainersById(@PathVariable("id")Integer id) {
 		Trainer t=trainerService.findTrainerById(id);

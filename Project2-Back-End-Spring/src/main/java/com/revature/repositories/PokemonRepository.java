@@ -9,8 +9,7 @@ import com.revature.models.Pokemon;
 
 public interface PokemonRepository extends JpaRepository<Pokemon , Integer> 
 {
-	public List<Pokemon> findByPokemonName(String pokemonName);
-	public List<Pokemon> findAllByUserId(Integer userId);
-
+	public List<Pokemon> findAllPokemonsByUserId(Integer userId);//findAllByUserId
+	public Pokemon findPokemonByPokemonName(String pokemonName);
 
 }
