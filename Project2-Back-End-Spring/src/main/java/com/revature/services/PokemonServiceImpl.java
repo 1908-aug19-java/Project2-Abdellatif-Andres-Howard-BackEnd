@@ -22,6 +22,17 @@ public class PokemonServiceImpl implements PokemonService{
 		
 		return pokemonRepository.getOne(id);
 	}
+	@Override
+	public Pokemon findPokemonByUserId(Integer userId) {
+		return pokemonRepository.getOne(userId);
+	}
+
+	@Override
+	public List<Pokemon> getPokemonsByUserId(Integer userId)	{
+		
+		return pokemonRepository.findAllByUserId(userId);
+	}
+	
 	
 	@Override
 	public Pokemon addPokemon(Pokemon p) {
@@ -46,6 +57,6 @@ public class PokemonServiceImpl implements PokemonService{
 	public List<Pokemon> findPokemonsByName(String pokemonName) {
 		return pokemonRepository.findByPokemonName(pokemonName);
 	}
-
+	
 }
 

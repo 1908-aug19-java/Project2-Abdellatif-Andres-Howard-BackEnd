@@ -1,7 +1,5 @@
 package com.revature.controllers;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +15,7 @@ import com.revature.services.TrainerService;
 @RestController 
 @CrossOrigin(maxAge = 3600)
 @RequestMapping("/login")
-class LoginController 
+public class LoginController 
 {
 	@Autowired
 	private TrainerService trainerService;
@@ -31,7 +29,7 @@ class LoginController
 		if (trainer!=null) {
 			if (result) 
 			{
-				System.out.println(trainer);			
+				System.out.println(trainer);
 			    return new ResponseEntity<Trainer>(trainer,HttpStatus.OK);
 			}
 			else 
@@ -45,6 +43,5 @@ class LoginController
 			System.out.println(" Empty Crediential");				
 			return null;
 		}
-		
 	}
 }

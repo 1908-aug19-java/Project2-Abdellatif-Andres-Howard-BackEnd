@@ -22,10 +22,10 @@ public class TrainerServiceImpl implements TrainerService {
 	public Trainer findTrainerById(Integer id) {
 		return trainerRepository.getOne(id);
 	}
-	@Override
-	public Trainer findAllPkemonsByTrainerId(Integer id) {
-		return trainerRepository.findAllPokemonByTrainerId(id);
-	}
+//	@Override
+//	public Trainer findAllPkemonsByTrainerId(Integer id) {
+//		return trainerRepository.findAllPokemonByTrainerId(id);
+//	} //this functionality is moved to pokemon controller
 	@Override
 	public Trainer addTrainer(Trainer t) {
 		return trainerRepository.save(t);
@@ -52,9 +52,11 @@ public class TrainerServiceImpl implements TrainerService {
 
 	@Override
 	public Boolean  validateTrainer(Trainer t) {
-		// TODO Auto-generated method stub
 		return trainerRepository.findTrainerByuserNameAndPassword(t.getUserName(),t.getPassword())!=null;
 	}
+
+	
+
 	
 
 	

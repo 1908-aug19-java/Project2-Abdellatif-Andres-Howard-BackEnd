@@ -2,7 +2,6 @@ package com.revature.controllers;
 
 import java.util.List;
 
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,19 +36,20 @@ public class TrainerController {
 		return trainerService.findAllTrainers();
 	}	
 	@GetMapping("/{id}")
-	public Trainer getTrainerById(@PathVariable("id")Integer id) {
+	public Trainer getTrainersById(@PathVariable("id")Integer id) {
 		return trainerService.findTrainerById(id);
+
 	}
-	@GetMapping("/{userId}/pokemons")
-	public Trainer getAllPokemonByuserId(@PathVariable("userId")Integer userid) {
-		return trainerService.findAllPkemonsByTrainerId(userid);
-	}
+//	@GetMapping("/{userId}/pokemons")
+//	public List<Trainer> getAllPokemonByuserId(@PathVariable("userId")Integer userid) {
+//		return trainerService.findAllPkemonsByTrainerId(userid);
+//	} // move to the pokemon controller
 	@PostMapping
 	public ResponseEntity<Trainer> addTrainer(@RequestBody Trainer trainer){
 		trainerService.addTrainer(trainer);
 		return new ResponseEntity<Trainer>(trainer, HttpStatus.CREATED);
 	}
-	// update by id 
+
 	@PutMapping("/{id}")
 	public Trainer updateTrainer(@PathVariable("id")Integer id, @RequestBody Trainer t) {
 		t.setTrainerId(id);
@@ -58,8 +58,12 @@ public class TrainerController {
 	
 	@DeleteMapping("/{username}")
 	public Trainer deleteTrainer(@PathVariable("userName")String username) {
-		return trainerService.deleteTrainer(new Trainer(username));
+		Trainer trainer = (Trainer) trainerService.findTrainersByuserName(username);
+				
+		return trainerService.deleteTrainer(trainer);
 	}
+
+	 
 	
 	
 	

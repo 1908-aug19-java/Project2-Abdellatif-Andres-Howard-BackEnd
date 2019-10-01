@@ -39,6 +39,10 @@ public class PokemonController {
 	public Pokemon getPokemonById(@PathVariable("id")Integer id) {
 		return pokemonService.findPokemonById(id);
 	}
+	@GetMapping("/{userid}")
+	public List<Pokemon> getAllPokemonsByUserId(@PathVariable("userid")Integer id) {
+		return pokemonService.getPokemonsByUserId(id);
+	}
 	
 	@PostMapping
 	public ResponseEntity<Pokemon> addPokemon(@RequestBody Pokemon p){

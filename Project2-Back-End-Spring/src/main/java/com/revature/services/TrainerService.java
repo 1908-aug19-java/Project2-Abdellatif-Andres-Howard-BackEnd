@@ -8,7 +8,7 @@ public interface TrainerService {
 	
 	public List<Trainer> findAllTrainers();
 	public Trainer findTrainerById(Integer id);
-	public Trainer findAllPkemonsByTrainerId(Integer id);
+	//public Trainer findAllPkemonsByTrainerId(Integer id); moved to pokemon services
 	public Trainer addTrainer(Trainer t);
 	public Trainer updateTrainer(Trainer t);
 	public Trainer deleteTrainer(Trainer t);
