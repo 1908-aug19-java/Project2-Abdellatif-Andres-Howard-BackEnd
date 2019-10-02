@@ -33,21 +33,23 @@ public class TrainerController {
 	public List<Trainer> getAll(){
 		return trainerService.findAllTrainers();
 	}
-//	@GetMapping("/{userName}")
-//	public List<Trainer> getAllbyUsername(@RequestParam(value="userName",required=false)String userName){
-//		if(userName==null) {
-//			throw new TrainerNotFoundException();
-//		}
-//			return trainerService.findTrainersByuserName(userName);
-//	}	
-	@GetMapping("/{id}")
-	public Trainer getTrainersById(@PathVariable("id")Integer id) {
-		Trainer t=trainerService.findTrainerById(id);
+	
+	@GetMapping("/{userName}")
+	public Trainer getTrainersById(@PathVariable("userName")String username) {
+		Trainer t=trainerService.findTrainerByuserName(username);
 		if (t==null) {
 			throw new TrainerNotFoundException();
 		}
 		return t;
 	}
+//	@GetMapping("/{id}") // used by username instead
+//	public Trainer getTrainersById(@PathVariable("id")Integer id) {
+//		Trainer t=trainerService.findTrainerById(id);
+//		if (t==null) {
+//			throw new TrainerNotFoundException();
+//		}
+//		return t;
+//	}
 
 	@PostMapping
 	public ResponseEntity<Trainer> addTrainer(@RequestBody Trainer trainer){
@@ -59,8 +61,7 @@ public class TrainerController {
 	public Trainer updateTrainer(@PathVariable("id")Integer id, @RequestBody Trainer t) {
 		t.setTrainerId(id);
 		return trainerService.updateTrainer(t);		
-	}
-	
+	}	
 	@DeleteMapping("/{userName}")
 	public Trainer deleteTrainer(@PathVariable("userName")String username) {
 		Trainer trainer =  trainerService.findTrainerByuserName(username);

@@ -30,7 +30,10 @@ public class LoginController
 			if (result) 
 			{
 				System.out.println(trainer);
+				//trainer.getTrainerId();
 			    return new ResponseEntity<Trainer>(trainer,HttpStatus.OK);
+				//Trainer t=trainerService.findTrainerById(id);
+
 			}
 			else 
 			{
