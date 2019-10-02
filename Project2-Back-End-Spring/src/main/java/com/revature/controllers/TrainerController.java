@@ -48,10 +48,7 @@ public class TrainerController {
 		}
 		return t;
 	}
-//	@GetMapping("/{userId}/pokemons")
-//	public List<Trainer> getAllPokemonByuserId(@PathVariable("userId")Integer userid) {
-//		return trainerService.findAllPkemonsByTrainerId(userid);
-//	} // move to the pokemon controller
+
 	@PostMapping
 	public ResponseEntity<Trainer> addTrainer(@RequestBody Trainer trainer){
 		trainerService.addTrainer(trainer);

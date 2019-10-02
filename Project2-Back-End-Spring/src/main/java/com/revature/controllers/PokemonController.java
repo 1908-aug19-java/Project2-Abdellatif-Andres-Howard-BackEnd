@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.exceptions.PokemonNotFoundException;
 import com.revature.models.Pokemon;
+import com.revature.models.Trainer;
 //import com.revature.services.PokemonService;
 import com.revature.services.PokemonService;
 
@@ -51,10 +52,11 @@ public class PokemonController {
 	@ResponseBody
 	public Pokemon getpokemonsByName(@RequestParam(name="pokemonName",required=false) String name){
 
-		if(name!=null) {
-			return pokemonService.findPokemonByName(name);		
+		if(name==null) {
+			throw new PokemonNotFoundException();
+
 		}
-		throw new PokemonNotFoundException();
+		return pokemonService.findPokemonByName(name);		
 	}
 	@PostMapping
 	public ResponseEntity<Pokemon> addPokemon(@RequestBody Pokemon p){
@@ -66,7 +68,6 @@ public class PokemonController {
 		pokemonService.addPokemon(p);
 		return new ResponseEntity<Pokemon>(p, HttpStatus.CREATED);
 	}
-	
 	@PutMapping("/{pokemonName}")
 	public Pokemon updatePokemon(@PathVariable("pokemonName")String name, @RequestBody Pokemon p) {
 		p.setPokemonNickName(name);

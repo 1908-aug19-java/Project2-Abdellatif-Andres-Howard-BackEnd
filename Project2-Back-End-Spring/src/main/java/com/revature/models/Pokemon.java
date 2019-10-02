@@ -18,10 +18,10 @@ public class Pokemon implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Id
+
 	@Column(name="userId")
 	private Integer userId;
-	
+	@Id
 	@NotNull
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="pokemonId")
@@ -39,10 +39,6 @@ public class Pokemon implements Serializable {
 	public Pokemon() {
 		super();
 	}
-//	public Pokemon(String pokemonName) {
-//		super();
-//		this.pokemonName = pokemonName;
-//	}
 	public Pokemon(@NotNull Integer pokemonId, Integer userId, @NotBlank String pokemonName, String pokemonNickName,
 			String type, String move) {
 		super();
