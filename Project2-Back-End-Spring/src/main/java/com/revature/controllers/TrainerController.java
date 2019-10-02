@@ -35,7 +35,7 @@ public class TrainerController {
 	}
 	
 	@GetMapping("/{userName}")
-	public Trainer getTrainersById(@PathVariable("userName")String username) {
+	public Trainer getTrainersByUsername(@PathVariable("userName")String username) {
 		Trainer t=trainerService.findTrainerByuserName(username);
 		if (t==null) {
 			throw new TrainerNotFoundException();
