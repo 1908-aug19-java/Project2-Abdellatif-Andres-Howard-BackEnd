@@ -31,14 +31,14 @@ public class TrainerControllerTest {
 	        MockitoAnnotations.initMocks(this);
 	    }
 	    @Test
-	    public void testFindTrainerById() {
+	    public void testFindTrainerByUsername() {
 	        Trainer t = new Trainer();
-	        t.setTrainerId(1);
-	        when(trainerService.findTrainerById(1)).thenReturn(t);
+	        t.setUserName("abdo123");
+	        when(trainerService.findTrainerByuserName("abdo123")).thenReturn(t);
 	        
-	        Trainer trainer = trainerController.getTrainersById(1);
-	        verify(trainerService).findTrainerById(1);
-	        assertEquals(1, trainer.getTrainerId().intValue());
+	        Trainer trainer = trainerController.getTrainersByUsername("abdo123");
+	        verify(trainerService).findTrainerByuserName("abdo123");
+	        assertEquals("abdo123", trainer.getUserName());
 	    }
 	 
 	    @Test
