@@ -29,7 +29,7 @@ public class LoginController
 		Boolean result =trainerService.validateTrainer(trainer);
 		log.info("login: "+result);
 		if (trainer!=null) {
-			if (result) 
+			if (Boolean.TRUE.equals(result)) 
 			{
 				log.info(trainer);
 			    return new ResponseEntity<Trainer>(trainer,HttpStatus.OK);
