@@ -7,7 +7,6 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -19,9 +18,7 @@ import com.revature.controllers.PokemonController;
 import com.revature.models.Pokemon;
 import com.revature.services.PokemonService;
 
-
 public class PokemonControllerTest {
-	private static Logger log = Logger.getRootLogger();
 
 	 @InjectMocks
 	 private PokemonController pokemonController;
@@ -29,18 +26,13 @@ public class PokemonControllerTest {
 	    @Mock
 		private PokemonService pokemonService;	
 
-
 	    @Before
 	    public void init() {
 	        MockitoAnnotations.initMocks(this);
-	    }
-
-	    
+	    }    
 	    @Test
 	    public void testfindAllPokemonByUserId() {
-
 	        List<Pokemon> pokeList=new ArrayList<>();
-
 	        Pokemon p1 = new Pokemon(1,1,"mew","mew mew","fire","fly");
 	        Pokemon p2 = new Pokemon(2,1,"poke2","pokeNik","Ice","swim");
 	        pokeList.add(p1);
@@ -59,11 +51,20 @@ public class PokemonControllerTest {
 	        when(pokemonService.addPokemon(p)).thenReturn(p);
 	       
 	        ResponseEntity<Pokemon> pp = pokemonController.addPokemon(p);
-	        log.info("pokemon created code status"+pp.getStatusCode());
-	       verify(pokemonService).addPokemon(p);   
+	        verify(pokemonService).addPokemon(p);   
 	        assertEquals(201,pp.getStatusCodeValue());
 	    }
-	 
+	    @Test
+	    public void testUpdatePokemon() {
+	        Pokemon p  = new Pokemon(1,1,"mew","mew mew","fire","fly");
+	        String nickname="newNinckname";				
+	        when(pokemonService.updatePokemon(p)).thenReturn(p);
+	       
+	        Pokemon pp = pokemonController.updatePokemon(nickname, p);
+	        verify(pokemonService).updatePokemon(p); 
+	        assertEquals(nickname,pp.getPokemonNickName());
+
+	    }
 
 	
 	

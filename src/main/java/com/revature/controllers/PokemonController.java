@@ -70,6 +70,7 @@ public class PokemonController {
 	@PutMapping("/{pokemonName}")
 	public Pokemon updatePokemon(@PathVariable("pokemonName")String name, @RequestBody Pokemon p) {
 		p.setPokemonNickName(name);
+		
 		return pokemonService.updatePokemon(p);
 		
 	}

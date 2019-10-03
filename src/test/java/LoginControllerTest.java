@@ -28,7 +28,7 @@ public class LoginControllerTest {
 	        Trainer t = new Trainer("abdo123","1234");	  
 	        when(trainerService.validateTrainer(t)).thenReturn(true);
 	        ResponseEntity<Trainer> tt =  loginController.getUserLogin(t);
-	        assertEquals(200, tt.getStatusCodeValue());//ok
+	        assertEquals(200, tt.getStatusCodeValue());
 	    }
 	    
 

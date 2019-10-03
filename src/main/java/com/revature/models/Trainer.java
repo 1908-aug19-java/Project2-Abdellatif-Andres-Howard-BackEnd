@@ -12,7 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -52,17 +51,13 @@ public class Trainer implements Serializable {
 		super();
 		this.trainerId= 0;
 	}
-	//FOR LOGIN
 		public Trainer(String userName, String password) {
 			super();
 			this.trainerId= 0;
 			this.userName = userName;
 			this.password= password;
 		}
-//		public Trainer (String userName) {
-//			super();
-//			this.userName = userName;
-//		}
+
 	public Trainer(Integer trainerId, String firstName, String lastName, String userName, String password,
 			String starterPokemon, List<Pokemon> pokelist) {
 		super();

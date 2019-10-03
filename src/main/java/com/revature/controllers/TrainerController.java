@@ -30,8 +30,7 @@ public class TrainerController {
 	@GetMapping
 	public List<Trainer> getAll(){
 		return trainerService.findAllTrainers();
-	}
-	
+	}	
 	@GetMapping("/{userName}")
 	public Trainer getTrainersByUsername(@PathVariable("userName")String username) {
 		Trainer t=trainerService.findTrainerByuserName(username);
@@ -49,13 +48,15 @@ public class TrainerController {
 	@PutMapping("/{id}")
 	public Trainer updateTrainer(@PathVariable("id")Integer id, @RequestBody Trainer t) {
 		t.setTrainerId(id);
+		
 		return trainerService.updateTrainer(t);		
 	}	
 	@DeleteMapping("/{userName}")
 	public Trainer deleteTrainer(@PathVariable("userName")String username) {
 		Trainer trainer =  trainerService.findTrainerByuserName(username);
 		if (trainer==null) {
-			throw new TrainerNotFoundException();
+		throw new TrainerNotFoundException();
+		//System.err.println("nothing");
 		}				
 		return trainerService.deleteTrainer(trainer);
 	}
