@@ -24,7 +24,6 @@ import com.revature.services.TrainerService;
 @CrossOrigin(maxAge = 3600)
 @RequestMapping("/users")
 public class TrainerController {
-	private static Logger log = Logger.getRootLogger();
 
 	@Autowired
 	private TrainerService trainerService;	
