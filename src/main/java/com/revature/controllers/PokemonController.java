@@ -3,6 +3,7 @@ package com.revature.controllers;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +33,7 @@ import com.revature.services.PokemonService;
 @RequestMapping("/pokemons")
 
 public class PokemonController {
+	private static Logger log = Logger.getRootLogger();
 	@Autowired
 	private PokemonService pokemonService;
 	
@@ -61,7 +63,7 @@ public class PokemonController {
 	@PostMapping
 	public ResponseEntity<Pokemon> addPokemon(@RequestBody Pokemon p){
 		if (p==null) {
-			System.out.println("Form cannot be null");				
+			log.info("Form cannot be null");				
 		    return new ResponseEntity<Pokemon>(HttpStatus.BAD_REQUEST);
 		}
 		

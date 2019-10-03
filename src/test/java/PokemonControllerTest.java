@@ -6,6 +6,8 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -15,11 +17,11 @@ import org.springframework.http.ResponseEntity;
 
 import com.revature.controllers.PokemonController;
 import com.revature.models.Pokemon;
-import com.revature.models.Trainer;
 import com.revature.services.PokemonService;
 
 
 public class PokemonControllerTest {
+	private static Logger log = Logger.getRootLogger();
 
 	 @InjectMocks
 	 private PokemonController pokemonController;
@@ -55,9 +57,9 @@ public class PokemonControllerTest {
 	    public void testaddPokemon() {
 	        Pokemon p  = new Pokemon(1,1,"mew","mew mew","fire","fly");
 	        when(pokemonService.addPokemon(p)).thenReturn(p);
-	        
+	       
 	        ResponseEntity<Pokemon> pp = pokemonController.addPokemon(p);
-	        System.out.println("pokemon created code status"+pp.getStatusCode());
+	        log.info("pokemon created code status"+pp.getStatusCode());
 	       verify(pokemonService).addPokemon(p);   
 	        assertEquals(201,pp.getStatusCodeValue());
 	    }

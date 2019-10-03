@@ -2,7 +2,7 @@ package com.revature.controllers;
 
 import java.util.List;
 
-
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.exceptions.TrainerNotFoundException;
@@ -25,6 +24,7 @@ import com.revature.services.TrainerService;
 @CrossOrigin(maxAge = 3600)
 @RequestMapping("/users")
 public class TrainerController {
+	private static Logger log = Logger.getRootLogger();
 
 	@Autowired
 	private TrainerService trainerService;	
@@ -42,15 +42,6 @@ public class TrainerController {
 		}
 		return t;
 	}
-//	@GetMapping("/{id}") // used by username instead
-//	public Trainer getTrainersById(@PathVariable("id")Integer id) {
-//		Trainer t=trainerService.findTrainerById(id);
-//		if (t==null) {
-//			throw new TrainerNotFoundException();
-//		}
-//		return t;
-//	}
-
 	@PostMapping
 	public ResponseEntity<Trainer> addTrainer(@RequestBody Trainer trainer){
 		trainerService.addTrainer(trainer);

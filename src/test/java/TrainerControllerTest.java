@@ -1,9 +1,8 @@
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-
+import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -12,17 +11,15 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.http.ResponseEntity;
 
 import com.revature.controllers.TrainerController;
-import com.revature.models.Pokemon;
 import com.revature.models.Trainer;
 import com.revature.services.TrainerService;
 
 
 public class TrainerControllerTest {
+		private static Logger log = Logger.getRootLogger();
 
-	
-	 @InjectMocks
+	    @InjectMocks
 	    private TrainerController trainerController;
-
 	    @Mock
 		private TrainerService trainerService;	
 
@@ -48,7 +45,7 @@ public class TrainerControllerTest {
 	        when(trainerService.addTrainer(t)).thenReturn(t);
 	        
 	        ResponseEntity<Trainer> tt = trainerController.addTrainer(t);
-	        System.out.println("response entity trainer adding code "+tt.getStatusCode());
+	        log.info("response entity trainer adding code "+tt.getStatusCode());
 	        verify(trainerService).addTrainer(t);   
 	        assertEquals(201,tt.getStatusCodeValue());
 	    }

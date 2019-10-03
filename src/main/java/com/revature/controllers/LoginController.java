@@ -1,5 +1,6 @@
 package com.revature.controllers;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,34 +17,33 @@ import com.revature.services.TrainerService;
 @CrossOrigin(maxAge = 3600)
 @RequestMapping("/login")
 public class LoginController 
-{
+{	private static Logger log = Logger.getRootLogger();
+
 	@Autowired
 	private TrainerService trainerService;
 
 	@PostMapping
 	public ResponseEntity <Trainer> getUserLogin(@RequestBody Trainer trainer)
 	{
-		System.out.println("login info "+trainerService.validateTrainer(trainer));
+		log.info("login info "+trainerService.validateTrainer(trainer));
 		Boolean result =trainerService.validateTrainer(trainer);
-		System.out.println("login: "+result);
+		log.info("login: "+result);
 		if (trainer!=null) {
 			if (result) 
 			{
-				System.out.println(trainer);
-				//trainer.getTrainerId();
+				log.info(trainer);
 			    return new ResponseEntity<Trainer>(trainer,HttpStatus.OK);
-				//Trainer t=trainerService.findTrainerById(id);
 
 			}
 			else 
 			{
-				System.out.println("Wrong Credinetial");				
+				log.info("Wrong Credinetial");				
 			    return new ResponseEntity<Trainer>(HttpStatus.NOT_FOUND);
 			}
 		}
 		else 
 		{
-			System.out.println(" Empty Crediential");				
+			log.info(" Empty Crediential");				
 			return null;
 		}
 	}
