@@ -36,8 +36,14 @@ public class Pokemon implements Serializable {
 	private String type;
 	private String move;	
 
+	
 	public Pokemon() {
 		super();
+		this.pokemonId = 0;	
+	}
+	public Pokemon(int pokemonId) {
+		super();
+		this.pokemonId=pokemonId;
 	}
 	public Pokemon(@NotNull Integer pokemonId, Integer userId, @NotBlank String pokemonName, String pokemonNickName,
 			String type, String move) {

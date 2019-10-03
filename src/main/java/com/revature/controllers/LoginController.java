@@ -25,6 +25,7 @@ public class LoginController
 	@PostMapping
 	public ResponseEntity <Trainer> getUserLogin(@RequestBody Trainer trainer)
 	{
+		String jwtToken = "";
 		log.info("login info "+trainerService.validateTrainer(trainer));
 		Boolean result =trainerService.validateTrainer(trainer);
 		log.info("login: "+result);
@@ -32,6 +33,7 @@ public class LoginController
 			if (Boolean.TRUE.equals(result)) 
 			{
 				log.info(trainer);
+				
 			    return new ResponseEntity<Trainer>(trainer,HttpStatus.OK);
 
 			}

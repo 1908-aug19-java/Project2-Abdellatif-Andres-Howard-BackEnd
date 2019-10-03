@@ -50,6 +50,7 @@ public class Trainer implements Serializable {
 
 	public Trainer() {
 		super();
+		this.trainerId= 0;
 	}
 	//FOR LOGIN
 		public Trainer(String userName, String password) {
@@ -58,10 +59,10 @@ public class Trainer implements Serializable {
 			this.userName = userName;
 			this.password= password;
 		}
-		public Trainer (String userName) {
-			super();
-			this.userName = userName;
-		}
+//		public Trainer (String userName) {
+//			super();
+//			this.userName = userName;
+//		}
 	public Trainer(Integer trainerId, String firstName, String lastName, String userName, String password,
 			String starterPokemon, List<Pokemon> pokelist) {
 		super();
