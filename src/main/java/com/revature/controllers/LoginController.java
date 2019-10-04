@@ -14,7 +14,7 @@ import com.revature.models.Trainer;
 import com.revature.services.TrainerService;
 
 @RestController 
-@CrossOrigin(maxAge = 3600)
+@CrossOrigin()
 @RequestMapping("/login")
 public class LoginController 
 {	private static Logger log = Logger.getRootLogger();
