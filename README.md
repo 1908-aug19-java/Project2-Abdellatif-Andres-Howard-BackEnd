@@ -19,5 +19,22 @@ Trainer can catch or deny pokemon
 Trainer can check the health of pokemon
 Trainer can view the time he catches pokemon
 Trainer can see his items inventory
-		Api:PokeApi
+
+Technologies used:  HTML, CSS, TYPESCRIT, JAVASCRIPT, JAVA 8, POSGRESQL
+			ANGULAR FRAMEWORK, SPRING, RUnNing on TOMCAT SERVER
+			
+
+Dat Model: SPRING MVC, SPRING ORM, SPRING DATA
+for creating the database we used SPRING beans. We used SPRING DATA to add our standard DOA methods to access the database. We also used SPRINGS OBJECT RELATIONAL MODEL to create tables and their constraints in the databse. Spring model view controllor was used to connect Java to the Angular and the front end..
+
+
+3 tables, Trainer table, Pokemon table and a join table to connect them both
+ Trainers table 
+- Primary key Trainer Id
+ Pokemons table
+- Primary key Pokemon Id
+ 
+ 
+		
+
 
