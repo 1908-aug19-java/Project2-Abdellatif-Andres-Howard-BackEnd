@@ -20,7 +20,7 @@ import com.revature.models.Trainer;
 import com.revature.services.TrainerService;
 
 @RestController 
-@CrossOrigin()
+@CrossOrigin
 @RequestMapping("/users")
 public class TrainerController {
 
