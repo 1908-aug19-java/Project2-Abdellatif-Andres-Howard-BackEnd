@@ -25,7 +25,7 @@ import com.revature.services.PokemonService;
 
 
 @RestController 
-@CrossOrigin(maxAge = 3600)
+@CrossOrigin()
 
 @RequestMapping("/pokemons")
 
