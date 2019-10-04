@@ -25,7 +25,7 @@ import com.revature.services.PokemonService;
 
 
 @RestController 
-@CrossOrigin()
+@CrossOrigin
 
 @RequestMapping("/pokemons")
 
