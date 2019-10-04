@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.revature.project2.model.AccountInfo" table="accountInfo">
+		<id name="id" column="account_id">
+			<generator class="foreign"> <param name = "property">account</param></generator>
+			
+		</id>
+		<property name="mail" column="email"></property>
+		<property name="name" column="name"></property>
+		<property name="gender" column="gender"></property>
+		<one-to-one name="account" constrained="true" class="com.revature.project2.model.Account" />
+	</class>
+</hibernate-mapping>
